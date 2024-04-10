@@ -44,9 +44,8 @@ export const fetchByReviews = async (movieId) => {
     },
   };
 
-  const response = await axios.request(options);
-  const movieReviews = response.data.results;
-  return movieReviews;
+  const { data } = await axios.request(options);
+  return data;
 };
 
 export const fetchByCredits = async (movieId) => {
