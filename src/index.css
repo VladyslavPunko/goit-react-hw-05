@@ -1,21 +1,8 @@
-
-
-body {
-  margin: 0;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-}
-
-/* src/index.css */
-
 body {
   font-family: sans-serif;
   line-height: 1.5;
+  margin: 0;
+  background-color: rgb(206, 233, 158);
 }
 
 h1,
