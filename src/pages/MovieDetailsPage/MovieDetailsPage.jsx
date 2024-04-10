@@ -2,24 +2,37 @@ import { fetchTrandMoviesById } from "../../movies-API";
 
 import { useEffect, useRef } from "react";
 import { useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  Routes,
+  NavLink,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import css from "./MovieDetailsPage.module.css";
+import clsx from "clsx";
+import MovieCast from "../../Components/MovieCast/MovieCast";
+import MovieReviews from "../../Components/MovieReviews/MovieReviews";
+
+const activeLink = ({ isActive }) => {
+  return clsx(css.details_link, isActive && css.active);
+};
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovieDetails] = useState(null);
   const location = useLocation();
   const backLink = useRef(location.state ?? "/");
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchMovieDetails() {
       try {
-        setError(false);
         const movie = await fetchTrandMoviesById(movieId);
         setMovieDetails(movie);
       } catch (error) {
-        setError(true);
+        console.log(error);
       }
     }
     fetchMovieDetails();
@@ -39,9 +52,7 @@ const MovieDetailsPage = () => {
         />
         <h2 className={css.movie_title}>{movie.title}</h2>
         <p>User score: {vote}%</p>
-        <p className={css.movie_overview}>
-          <h4 className={css.reve}>Overview</h4> {movie.overview}
-        </p>
+        <p className={css.movie_overview}>Overview{movie.overview}</p>
         {movie.genres !== null && (
           <ul className={css.genres_list}>
             <h2>Genres :</h2>
@@ -54,6 +65,23 @@ const MovieDetailsPage = () => {
             })}
           </ul>
         )}
+        <ul className={css.details_list}>
+          <li className={css.details_item}>
+            <NavLink className={activeLink} to="cast">
+              Cast
+            </NavLink>
+          </li>
+          <li className={css.details_item}>
+            <NavLink className={activeLink} to="reviews">
+              Reviews
+            </NavLink>
+          </li>
+        </ul>
+        <Routes>
+          <Route path="cast" element={<MovieCast />}></Route>
+          <Route path="reviews" element={<MovieReviews />}></Route>
+        </Routes>
+        <Outlet />
       </div>
     );
   }

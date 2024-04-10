@@ -10,7 +10,6 @@ const HomePage = () => {
     async function fetchMovies() {
       try {
         const response = await fetchTrandMovies();
-        console.log("response: ", response);
         setFilms(response.results);
       } catch (error) {
         console.log(error);
