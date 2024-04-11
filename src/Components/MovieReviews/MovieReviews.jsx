@@ -11,7 +11,7 @@ const MovieReviews = () => {
     async function fetchReviews() {
       try {
         const reviews = await fetchByReviews(movieId);
-        setMovieReviews(reviews);
+        setMovieReviews(reviews.results);
       } catch (error) {
         console.log(error);
       }
@@ -22,7 +22,7 @@ const MovieReviews = () => {
   if (movie !== 0) {
     return (
       <>
-        {movie.length === null ? (
+        {!movie ? (
           <div>There are no reviews</div>
         ) : (
           <ul className={css.review_list}>
