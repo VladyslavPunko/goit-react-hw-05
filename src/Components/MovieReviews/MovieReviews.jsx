@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader.jsx";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
-  const [movie, setMovieReviews] = useState(null);
+  const [movie, setMovieReviews] = useState([]);
 
   useEffect(() => {
     async function fetchReviews() {
@@ -20,27 +20,19 @@ const MovieReviews = () => {
     fetchReviews();
   }, [movieId]);
 
-  if (movie !== 0) {
+  if (movie.length !== 0) {
     return (
-      <>
-        {!movie ? (
-          <div> Not found</div>
-        ) : (
-          <>
-            <ul className={css.review_list}>
-              {movie.map((review) => {
-                return (
-                  <li key={review.id} className={css.cast_item}>
-                    <p className={css.author}>Author: {review.author}</p>
-                    <p>{review.content}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </>
-        )}
-      </>
+      <ul className={css.review_list}>
+        {movie.map((review) => (
+          <li key={review.id} className={css.cast_item}>
+            <p className={css.author}>Author: {review.author}</p>
+            <p>{review.content}</p>
+          </li>
+        ))}
+      </ul>
     );
+  } else {
+    return <div>Not found</div>;
   }
 };
 
