@@ -13,8 +13,8 @@ import {
 } from "react-router-dom";
 import css from "./MovieDetailsPage.module.css";
 import clsx from "clsx";
-import MovieCast from "../../Components/MovieCast/MovieCast";
-import MovieReviews from "../../Components/MovieReviews/MovieReviews";
+import MovieCast from "../../components/MovieCast/MovieCast";
+import MovieReviews from "../../components/MovieReviews/MovieReviews";
 
 const activeLink = ({ isActive }) => {
   return clsx(css.details_link, isActive && css.active);
@@ -24,6 +24,8 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovieDetails] = useState(null);
   const location = useLocation();
+  console.log("location12345: ", location);
+
   const backLink = useRef(location.state ?? "/");
 
   useEffect(() => {

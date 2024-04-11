@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import Navigation from "./Components/Navigation/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 import { Route, Routes } from "react-router-dom";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -9,7 +9,7 @@ const MovieDetailsPage = lazy(() =>
   import("./pages/MovieDetailsPage/MovieDetailsPage")
 );
 
-import Loader from "./Components/Loader/Loader";
+import Loader from "./components/Loader/Loader";
 function App() {
   return (
     <>
